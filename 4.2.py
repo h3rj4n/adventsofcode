@@ -13,6 +13,7 @@ bingoCards = []
 
 class bingoCard:
     def __init__(self):
+        self.turns = 0
         # Keep track of all the rows on the bingo card
         self.lines = []
         self.cols = []
@@ -36,6 +37,7 @@ class bingoCard:
 
             self.cols[index].append(n)
 
+
     def amountOfRows(self):
         return len(self.lines)
 
@@ -44,6 +46,12 @@ class bingoCard:
 
     """ Check if number exists in any row """
     def checkNumber(self, number):
+        if self.winner:
+            return self
+
+        # Keep track how manu turns it takes to win with this card.
+        self.turns += 1
+
         self.number = int(number)
         for index, line in enumerate(self.lines):
             self.lines[index] = set(self.lines[index]).difference([self.number])
@@ -99,28 +107,17 @@ for index, line in enumerate(f):
     # if (index > 16):
     #     break
 
-# for c in bingoCards:
-#     print(c.amountOfRows())
-
-winnerBingo = None
-
 for n in numbers.split(','):
     winner = False
     for card in bingoCards:
-        winner = card.checkNumber(n).hasWinner()
+        card.checkNumber(n)
 
-        # Stop when we have a winner.
-        if winner:
-            print('We have a winner! Last number: ', n)
-            winnerBingo = card
-            break
+def sortByTurns(e):
+    return e.turns
 
-    # Stop when we have a winner.
-    if winner:
-        break
+bingoCards.sort(reverse=True,key=sortByTurns)
 
-print('answer: ', winnerBingo.calculateResult())
+print('answer: ', bingoCards[0].calculateResult())
 
-# Wrong: 5870087 (too high)
-# Wrong: 88803 (too high)
-# Wrong: 58764 (too high)
+# 42432
+# 4880
