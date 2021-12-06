@@ -4,14 +4,14 @@ f = open("5_data.txt")
 data = []
 
 # Process the data to a valid input array
-for index, line in  enumerate(f):
+for index, line in enumerate(f):
     # Split on the arrow part, the first part is from, second to.
     processed = line.rstrip('\n').split(' -> ')
     data.append(processed)
 
     # For debug purposes, limit the for loop.
-    if index > 10:
-        break
+    # if index > 10:
+    #     break
 
 grid = {}
 
@@ -29,7 +29,7 @@ for item in data:
             endY = xyFrom[1] if xyFrom[1] > xyTo[1] else xyTo[1]
 
             # The y changes, while loop until values matches.
-            while startY < endY:
+            while startY <= endY:
                 i = ','.join([str(xyFrom[0]), str(startY)])
                 if i not in grid:
                     grid[i] = 0
@@ -41,9 +41,18 @@ for item in data:
             endX = xyFrom[0] if xyFrom[0] > xyTo[0] else xyTo[0]
 
             # The y changes, while loop until values matches.
-            while startX < endX:
+            while startX <= endX:
                 i = ','.join([str(startX), str(xyFrom[1])])
                 if i not in grid:
                     grid[i] = 0
                 grid[i] += 1
                 startX += 1
+
+# Filter out where the count is 1
+test = dict(filter(lambda x: x[1] > 1, grid.items()))
+
+print('answer: ', len(test))
+
+
+# 8022 (to low)
+# 8060

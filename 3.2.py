@@ -25,7 +25,7 @@ manipulatedLes = content
 
 for i in range(len(content[0].rstrip('\n'))):
     # print('array length before filter: ', len(manipulatedPos
-    
+
     # Only filter if we have more than one number left.
     if len(manipulatedPos) > 1:
         # Get the most common bit for the i-position
