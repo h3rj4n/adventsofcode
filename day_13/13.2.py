@@ -22,18 +22,17 @@ for ins in instructions:
             # Calculate new pos.
             data[index][pos] = int(ins[1]) - (value[pos] - int(ins[1]))
 
-print(data)
 output = defaultdict(list)
 for x, y in data:
-    print(x, y)
-    output[x].append(y)
+    output[y].append(x)
 
+r = max(output[0]) + 10
 keys = list(output.keys())
 keys.sort()
 for i in keys:
-    p = ''
-    for _ in range(len(set(output[i]))):
-        p += 'O' if _ in output[i] else '.'
+    p = '' + str(max(output[i])) + ' '
+    for _ in range(r):
+        p += '#' if _ in output[i] else ' '
     print(p)
 
 
