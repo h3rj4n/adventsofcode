@@ -12,6 +12,7 @@ ans = 0
 
 def processBit(b, cont=True, type=None, size=None):
     global ans
+
     print('input: ', b)
     version = int(b[:3], 2)
     # not 4 = operator | 4 = literal value
@@ -27,12 +28,11 @@ def processBit(b, cont=True, type=None, size=None):
         d = b[6:]
         numbers = wrap(d, 5)
         for n in numbers:
-            print(n)
             print('number: ', int(n[1:], 2))
 
-            if n[0] == 0:
+            if int(n[0]) == 0:
                 break
-        return
+        return b
 
     # either 1 (length 11), or 0 (lenght 15)
     lengthTypeId = int(b[6:7], 2)
@@ -44,14 +44,17 @@ def processBit(b, cont=True, type=None, size=None):
     subPacks = int(b[7:7+length], 2)
     print('subPacks: ', subPacks)
 
+    # We've established some values and stats. remove this from the bit string.
+    b = b[7+length:]
+
     # Do not continue when not asked.
     if cont is False:
-        return
+        return b
 
     if lengthTypeId == 0:
         # subPacks describe the length of the subpacks.
         # Grep the next part
-        actualData = b[7+length:7+length+subPacks]
+        actualData = b[:subPacks]
 
         # Loop trough the data, grep the next 11 bits? until
         # last group is found.
@@ -68,13 +71,15 @@ def processBit(b, cont=True, type=None, size=None):
 
             if lastBit:
                 break
+        # Remove the part we've just processed.
+        b = b[subPacks:]
+
     else:
-        # Remove all the process stuff.
-        s = b[18:]
         # subPacks describe the amount of subpacks.
         for _ in range(subPacks):
-            # processBit(s, cont=True)
-            pass
+            b = processBit(b, cont=False)
+
+    return b
 
 
 # Loop trough the lines and parse the lines.
