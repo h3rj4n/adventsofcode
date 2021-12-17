@@ -1,6 +1,6 @@
 from textwrap import wrap
 
-with open('16_demo.txt') as f:
+with open('16_data.txt') as f:
     data = []
     for line in f:
         line = line.strip()
@@ -69,34 +69,35 @@ def processBit(b, depth=0):
             b, n = processBit(b, depth=depth)
             numbers += n
 
+    print(prefix, numbers)
     numbOut = []
     # Add the numbers
     if typeId == 0:
-        # print(prefix, 'sum: ', sum(numbers))
+        print(prefix, 'sum: ', sum(numbers))
         numbOut.append(sum(numbers))
     if typeId == 1:
         result = 1
         for x in numbers:
             result = result * x
-        # print(prefix, 'product: ', result)
+        print(prefix, 'product: ', result)
         numbOut.append(result)
     if typeId == 2:
-        # print(prefix, 'min: ', min(numbers))
+        print(prefix, 'min: ', min(numbers))
         numbOut.append(min(numbers))
     if typeId == 3:
-        # print(prefix, 'max: ', max(numbers))
+        print(prefix, 'max: ', max(numbers))
         numbOut.append(max(numbers))
     if typeId == 5:
         v = 1 if numbers[0] > numbers[1] else 0
-        # print(prefix, 'greater: ', v)
+        print(prefix, 'greater: ', v)
         numbOut.append(v)
     if typeId == 6:
         v = 1 if numbers[0] < numbers[1] else 0
-        # print(prefix, 'less: ', v)
+        print(prefix, 'less: ', v)
         numbOut.append(v)
     if typeId == 7:
         v = 1 if numbers[0] == numbers[1] else 0
-        # print(prefix, 'equal: ', v)
+        print(prefix, 'equal: ', v)
         numbOut.append(v)
 
 
@@ -109,3 +110,4 @@ for b in data:
     print('answer: ', n[0])
 
 # 111253530
+# to, high: 912470916617688
