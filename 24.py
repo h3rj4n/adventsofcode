@@ -31,9 +31,5 @@ while len(lines) > 0:
     
         if _t and square[0] <= x <= square[1] and square[0] <= y <= square[1]:
             answer += 1
-        
-wrong = 'wrong' if answer <= 13066 else ''
-print("Answer 1:", answer, wrong)
 
-# To Low: 13066
-
+print("Answer 1:", answer)
