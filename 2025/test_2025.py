@@ -22,25 +22,10 @@ def test_day_03_analyze_bank(joltage, battery, expected):
     assert day_03.analyze_bank(battery, joltage) == expected
 
 
-# @pytest.mark.parametrize("joltage,battery,expected", [
-#     (12, 987654321111111, 987654321111),
-#     (12, 811111111111119, 811111111119),
-#     (12, 234234234234278, 434234234278),
-#     (12, 818181911112111, 888911112111),
-#     (12, 818181911112911, 888911112911),
-# ])
-# def test_day_03_analyze_override_bank(joltage, battery, expected):
-#     assert day_03.analyze_override_bank(battery, joltage) == expected
-
-
-def test_day_03_part_one():
+def test_day_03_part_on_and_two():
     line = "987654321111111,811111111111119,234234234234278,818181911112111"
-    assert day_03.part_one(line) == 357
-
-
-def test_day_03_part_two():
-    line = "987654321111111,811111111111119,234234234234278,818181911112111"
-    assert day_03.part_two(line) == 3121910778619
+    assert day_03.part_one_and_two(line, 2) == 357
+    assert day_03.part_one_and_two(line, 12) == 3121910778619
 
 
 @pytest.mark.parametrize("start,stop,expected", [
