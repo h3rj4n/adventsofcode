@@ -3,6 +3,35 @@ import pytest
 import day_01
 import day_02
 import day_03
+import day_04
+
+
+@pytest.mark.parametrize("rolls,position,expected", [
+    ({(0, 0), (0, 1), (1, 0)}, (1, 1), True),
+    ({(0, 0), (0, 1), (1, 0), (1, 2)}, (1, 1), False),
+    ({(1, 2), (2, 3), (3, 2), (3, 3)}, (2, 2), False),
+    (set(), (0, 0), True),
+])
+def test_day_04_access_paper_roll(rolls, position, expected):
+    assert day_04.access_paper_roll(rolls, position) == expected
+
+
+def test_day_04_convert_input_to_rolls():
+    line_number = 2
+    line = "..@@.@@@@.@"
+    expected = [(2, 2), (2, 3), (2, 5), (2, 6), (2, 7), (2, 8), (2, 10)]
+    assert day_04.convert_input_to_rolls(line_number, line) == expected
+
+
+def test_day_04_day_one_and_two():
+    rolls = set()
+    data = "..@@.@@@@.,@@@.@.@.@@,@@@@@.@.@@,@.@@@@..@.,@@.@@@@.@@,.@@@@@@@.@,.@.@.@.@@@,@.@@@.@@@@,.@@@@@@@@.,@.@.@@@.@."
+    for index, line in enumerate(data.split(",")):
+        new_line = day_04.convert_input_to_rolls(index, line.rstrip())
+        rolls.update(new_line)
+
+    assert day_04.day_one_and_two(rolls) == 13
+    assert day_04.day_one_and_two(rolls, 'two') == 43
 
 
 @pytest.mark.parametrize("joltage,battery,expected", [
