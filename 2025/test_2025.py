@@ -5,6 +5,7 @@ import day_02
 import day_03
 import day_04
 import day_05
+import day_06
 
 
 @pytest.mark.parametrize("part,start,rotation,expected", [
@@ -165,3 +166,41 @@ def test_day_05_filter_fresh_ingredients_ranges():
 def test_day_05_part_two():
     ingredients = "3-5,10-14,16-20,12-18"
     assert day_05.part_two(ingredients) == 14
+
+
+def test_day_06_solve_cephalopod_math_to_normal():
+    math_expression = [
+        [123, 328,  51, 64],
+        [45, 64,  387, 23],
+        [6, 98,  215, 314],
+        ['*', '+', '*', '+']
+    ]
+    assert day_06.solve_cephalopod_math_to_normal(
+        math_expression) == 4277556
+
+
+def test_day_06_process_str_data():
+    str_data = [
+        "123 328  51 64    4",
+        " 45 64  387 23    7",
+        "  6 98  215 314 424",
+        "*   +   *   +   *",
+    ]
+    expected = [
+        ['123', '328', ' 51', '64 ', '  4'],
+        [' 45', '64 ', '387', '23 ', '  7'],
+        ['  6', '98 ', '215', '314', '424'],
+        ['*  ', '+  ', '*  ', '+  ', '*'],
+    ]
+    assert day_06.process_str_data(str_data) == expected
+
+
+def test_day_06_actually_solve_cephalopod_math():
+    math_expression = [
+        ['123', '328', ' 51', '64 '],
+        [' 45', '64 ', '387', '23 '],
+        ['  6', '98 ', '215', '314'],
+        ['*  ', '+  ', '*  ', '+  ']
+    ]
+    assert day_06.actually_solve_cephalopod_math(
+        math_expression) == 3263827
