@@ -6,6 +6,7 @@ import day_03
 import day_04
 import day_05
 import day_06
+import day_07
 
 
 @pytest.mark.parametrize("part,start,rotation,expected", [
@@ -204,3 +205,8 @@ def test_day_06_actually_solve_cephalopod_math():
     ]
     assert day_06.actually_solve_cephalopod_math(
         math_expression) == 3263827
+
+
+def test_day_07_count_beam_splits():
+    input = ".......S.......,...............,.......^.......,...............,......^.^......,...............,.....^.^.^.....,...............,....^.^...^....,...............,...^.^...^.^...,...............,..^...^.....^..,...............,.^.^.^.^.^...^.,..............."
+    assert day_07.count_beam_splits(input) == 21
